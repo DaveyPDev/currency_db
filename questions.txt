@@ -1,0 +1,17 @@
+How to start:
+
+How to determine what package requirments?
+I just coppied from previous sections where it worked
+and had to tweek it until it all worked
+
+How to say what code used from where? 
+Copyright?
+
+struggled with the converter section
+between getting the routes to function
+
+_app_ctx_stack
+
+Json and decimals
+
+

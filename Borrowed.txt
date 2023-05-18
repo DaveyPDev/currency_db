@@ -1,0 +1,21 @@
+forgot to include stuffs taken off the web
+started adding things I've googled and used
+
+i forget how to like include borrowed code
+
+import decimal
+from decimal import Decimal
+from flask.json import JSONEncoder
+
+class DecimalEncoder(json.JSONEncoder):
+    def default(self, o):
+        if isinstance(o, decimal.Decimal):
+            return str(o)
+        return super(DecimalEncoder, self).default(o)
+
+unittest from python docs for the basic example skeleton 
+
+geekflare.com for steping through testing
+
+do I included every site i click? just snipets i use?
+

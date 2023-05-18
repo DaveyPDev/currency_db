@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1> Converter Results </h1>
+    {% if result %}
+    <p>
+        The conversion rate of {{ from_currency }} to {{ to_currency }} = {{ result }}
+    </p>
+    <a href="/converter"> Convert New Currency</a>
+    {% else %}
+    <p>
+        No Results. Please check Currency's
+    </p>
+    <a href="/converter"> Go Back </a>
+    {% endif %}
+{% endblock %}
