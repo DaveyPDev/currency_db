@@ -5,7 +5,8 @@ from forms import ConverterForm
 from models import connect_db, db, Currency, _app_ctx_stack, DecimalEncoder
 from werkzeug.exceptions import Unauthorized
 import requests
-
+import json
+from simplejson import dumps as json_dumps
 
 
 url = 'https://api.exchangerate.host'
@@ -15,7 +16,8 @@ data = response.json()
 print(data)
 
 app = Flask(__name__, template_folder='templates') 
-app.json_encoder = DecimalEncoder
+app.json_encoder = None
+app.json_dumps = json_dumps
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/currency_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
@@ -46,7 +48,7 @@ def convert_currency():
     if form.validate_on_submit():
         print('Form submitted')
         session['from_currency'] = form.from_currency.data
-        session[' to_currency'] = form.to_currency.data
+        session['to_currency'] = form.to_currency.data
         session['amount'] = form.amount.data
 
         print(f'Form Data: from_currency={session["from_currency"]}, to_currency={session["to_currency"]}, amount={session["amount"]}')
@@ -55,7 +57,9 @@ def convert_currency():
         response = requests.get(url)
         
         data = response.json()
-        session['result'] = data['result']
+
+        result_data = {'result': str(data['result'])}
+        session['result'] = json.dumps(result_data)
 
         print(f'API Response: {data}')
 
